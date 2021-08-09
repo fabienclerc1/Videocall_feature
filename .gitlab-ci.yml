@@ -1,0 +1,79 @@
+stages:
+  - pull
+  - build
+  - lint
+  - push
+  - cleanup
+  - deploy
+
+# log into the registry
+before_script:
+  - docker login -u "gitlab-ci-token" -p "$CI_BUILD_TOKEN" "$CI_REGISTRY"
+
+pull:
+  stage: pull
+  only:
+    - main
+  # for the first time we create a pull request while the registry is still empty
+  allow_failure: true
+  script:
+    - docker pull "$CI_REGISTRY_IMAGE":latest
+    - docker pull "$CI_REGISTRY_IMAGE":server
+
+build:
+  stage: build
+  only:
+    - main
+  script:
+    - docker build --tag="$CI_PIPELINE_ID":latest --cache-from="$CI_REGISTRY_IMAGE":latest .
+    - docker build --tag="$CI_PIPELINE_ID":server --cache-from="$CI_REGISTRY_IMAGE":server -f ./server/Dockerfile .
+
+# lint:
+#   stage: lint
+#   allow_failure: true
+#   only:
+#     - main
+#   script:
+#     - export CI_PIPELINE_ID=$CI_PIPELINE_ID
+#     - export CI_BUILD_REF_NAME=$CI_COMMIT_REF_NAME
+#     - docker-compose -p "$CI_PIPELINE_ID" -f docker-compose.ci.yml run app flake8 .
+
+
+# for branches
+push latest:
+  stage: push
+  only:
+    - main
+  script:
+    # rename the image so that it can be pushed into registry - docker tag changes the name to the registry name
+    - docker tag "$CI_PIPELINE_ID":latest "$CI_REGISTRY_IMAGE":latest
+    - docker push "$CI_REGISTRY_IMAGE":latest
+
+push server:
+  stage: push
+  only:
+    - main
+  script:
+    # rename the image so that it can be pushed into registry - docker tag changes the name to the registry name
+    - docker tag "$CI_PIPELINE_ID":server "$CI_REGISTRY_IMAGE":server
+    - docker push "$CI_REGISTRY_IMAGE":server
+
+cleanup:
+  stage: cleanup
+  only:
+    - main
+  when: always
+  script:
+    - docker rmi -f "$CI_PIPELINE_ID":"$CI_COMMIT_REF_NAME"
+    - docker-compose -p "$CI_PIPELINE_ID" -f docker-compose.ci.yml down --remove-orphans
+
+# start the image from the most recent push - control it so that it only deploys when merged into master
+deploy:
+  stage: deploy
+  only:
+    - main
+  when: manual
+  script:
+    # -f tells docker to use docker compose deploy file
+    - docker-compose -f docker-compose.deploy.yml down
+    - docker-compose -f docker-compose.deploy.yml up -d

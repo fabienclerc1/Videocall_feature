@@ -1,0 +1,10 @@
+name: django_base
+dependencies:
+  - python==3.9
+  - psycopg2=2.8
+  - pip:
+      - django==3.2
+      - djangorestframework==3.12
+      - djangorestframework_simplejwt==4.7
+      - gunicorn==20.1
+      - django-cors-headers==3.7.0

@@ -1,0 +1,36 @@
+version: "3"
+services:
+    backend:
+        image: videocall_backend:latest
+        ports:
+            - "8000:8000"
+        env_file:
+            - ./envs/dev.env
+        volumes:
+            - ./backend:/backend
+            - ./static-files:/static-files
+            - ./media-files:/media-files
+        command: "sh /scripts/dev.sh"
+        depends_on:
+            - postgres
+
+    postgres:
+        image: postgres:latest
+        ports:
+            - "5432:5432"
+        env_file:
+            - ./envs/dev.env
+        volumes:
+            - postgres_volume:/var/lib/postgresql/data
+
+    server:
+        image: signaling_server:latest
+        ports:
+            - "5000:5000"
+            - "9000:9000"
+        command: "node index.js"
+
+volumes:
+    postgres_volume:
+    static-files:
+    media-files:
