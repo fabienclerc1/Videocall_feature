@@ -1,10 +1,14 @@
-# Videocall feature
+# Videocall project
 
-Videocall feature to be integrated into a React.js web app and React Native mobile app.
+This is the project repository for the Videocall feature capstone project. The goal was to develop in three weeks a calling feature that would be integrated in two React.js and React Native apps of a medtech company located in Zürich.
 
--   The signaling is done via Socket.io to exchange peers information.
--   The video call is implemented with the PeerJS library (wrapping WebRTC) to establish the peer to peer connection and share the media streams between users.
--   The backend is built with Django and implements a REST API to store the assigned socket Ids and retrieve them from the web app.
+Developers on this project were [Linard Furck](https://www.linkedin.com/in/linard-furck-618a17212/), [Hannes Frömel](https://www.linkedin.com/in/hannes-froemel/) and [Fabien Clerc](https://www.linkedin.com/in/fabienclerc1/).
+
+# Technologies
+
+-   Signaling is done via Socket.io to exchange peers information.
+-   Video calls are implemented with the PeerJS library (wrapping WebRTC) to establish the peer to peer connection and share the media streams between users.
+-   The backend is built with Django and implements a REST API to store the assigned socket ids and retrieve them from the web app.
 
 ## Video call
 
