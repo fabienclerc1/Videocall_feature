@@ -23,20 +23,30 @@ const Input = styled.input`
     margin: 20px 0;
     border-radius: 5px;
     border: 1px solid lightgray;
+    outline: none;
     box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3), 0px 10px 20px rgba(0, 0, 0, 0.05);
 `
 
 const Button = styled.button`
-    height: 32px;
-    width: 100px;
+    height: 60px;
+    width: 200px;
     background: #2f80ec;
-    color: black;
-    border-radius: 5px;
+    border: none;
+    border-radius: 30px;
     margin: 0 15px;
     font-size: 18px;
     font-weight: 700;
     color: white;
     margin-top: 30px;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3), 0px 10px 20px rgba(0, 0, 0, 0.05);
+
+    :hover {
+        cursor: pointer;
+    }
+
+    :active {
+        transform: translate(0%, 2%);
+    }
 `
 
 const Image = styled.img`

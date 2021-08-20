@@ -38,37 +38,28 @@ const Contact = styled.div`
     color: black;
     padding: 20px;
     margin: 4px 0;
-    border-radius: 10px;
-    border: 1px solid #e9e9e9;
+    border-radius: 4px;
     box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3), 0px 10px 20px rgba(0, 0, 0, 0.05);
-  
 
     :hover {
-        background: #f9f9f9;
         cursor: pointer;
     }
 `
 
-const PhysicianId = styled.h3`
-    font-size: 8px;
-    color: #e6e6e6;
-    font-weight: 200;
-    padding-bottom: 5px;
-`
-
 const Name = styled.h3`
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 700;
     padding-bottom: 5px;
 `
 
 const Id = styled.h4`
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
+    color: rgba(0,0,0,0.5);
 `
 
 const Title = styled.h3`
-    font-size: 30px;
+    font-size: 24px;
     font-weight: 700;
     padding-bottom: 5px;
 `
@@ -81,7 +72,7 @@ const ContactMenu = () => {
    
 
     useEffect(() => {
-        FetchPatients();
+        FetchPatients(); //List of all patients available in the DB
     }, [me]);
 
     const FetchPatients = async () => {
@@ -107,14 +98,13 @@ const ContactMenu = () => {
         <Container>
             <LeftBar onClick={OnDisplayPatients}/>
             <Column>
-                <PhysicianId>id: {me}</PhysicianId>
                 <NotificationBar />
                 {showPatients && (
                     <Menu>
-                        <Title>Patients</Title>
+                        <Title>Patients list</Title>
                         {patients.map(patient => <Contact key={uuidv4()} onClick={() => OnChangeSelectedPatient(patient)}>
                             <Name>{patient.user.first_name} {patient.user.last_name}</Name>
-                            <Id>Patient code: # {patient.patient_code}</Id>
+                            <Id>Patient code: #{patient.patient_code}</Id>
                         </Contact>)}
                     </Menu>
                 )}

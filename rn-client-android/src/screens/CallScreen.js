@@ -24,7 +24,7 @@ class AudioCallScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.UIcontainer}>
+      <View style={styles.container}>
         <Image
           style={styles.profileImage}
           source={require('../assets/user.svg')}
@@ -52,7 +52,7 @@ class AudioCallScreen extends React.Component {
 export default AudioCallScreen;
 
 const styles = StyleSheet.create({
-  UIcontainer: {
+  container: {
     alignItems: 'center',
     justifyContent: 'center',
     height: '100%',

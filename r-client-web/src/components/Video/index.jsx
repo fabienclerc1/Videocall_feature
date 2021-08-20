@@ -9,17 +9,16 @@ const Container = styled.div`
 `
 
 const RemoteContainer = styled.div`
-display: flex;
-width: 100%;
-height: 100%;
-z-index: 4;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
 `;
 
 const VideoContainer = styled.div`
 	display: flex;
     width: 100%;
     object-fit: cover;
-    /* height: 100%; */
     z-index: 3;
 `;
 
@@ -41,18 +40,9 @@ const RemoteVideo = styled.video`
 
 const ImageLogo = styled.img`
     position: absolute;
-    top: 40%;
-    right: 25%;
+    top: 50%;
+    right: 45%;
     z-index: 0;
-`
-
-const Image = styled.img`
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
 `
 
 const VideoWindow = () => {
@@ -60,7 +50,7 @@ const VideoWindow = () => {
 
     useEffect(() => {
         ;
-    }, [callAccepted, callEnded])
+    }, [callAccepted, callEnded]);
 
     return (
         <Container>
