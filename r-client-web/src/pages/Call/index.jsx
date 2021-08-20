@@ -16,13 +16,6 @@ const RightContainer = styled.div`
   width: 70%;
   background: #fefefe;
 `
-const BackgroundImage = styled.img`
-    width: 70vw;
-    height: 60vh;
-    z-index: 1;
-`
-
-
 
 const Call = () => {
     return (

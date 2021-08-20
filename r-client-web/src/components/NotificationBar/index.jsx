@@ -9,15 +9,24 @@ const Container = styled.div`
 `
 
 const AnswerButton = styled.button`
-    height: 32px;
-    width: 120px;
+    height: 60px;
+    width: 200px;
     background: #2f80ec;
-    color: black;
-    border-radius: 5px;
+    border-radius: 30px;
+    border: none;
     margin: 20px 15px;
     font-size: 18px;
     font-weight: 700;
     color: white;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3), 0px 10px 20px rgba(0, 0, 0, 0.05);
+
+    :hover {
+        cursor: pointer;
+    }
+
+    :active {
+        transform: translate(0%, 2%);
+    }
 `
 
 const Message = styled.h1`
